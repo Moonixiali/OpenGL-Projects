@@ -15,13 +15,16 @@ int main() {
 		app->physicsComponents, 
 		app->renderComponents, app->transformComponents);
 
-	//factory->make_cube(
-	//	{3.0f, 0.0f, 0.25f}, {0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 10.0f});
+	factory->make_cube(
+		{3.0f, 0.0f, 0.25f}, {0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 10.0f});
 
-	factory->make_rat({0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 180.0f}, {0.0f, 0.0f, 720.0f});
+	factory->make_cube(
+		{4.0f, 1.0f, 0.25f}, {0.0f, 0.0f, 0.0f}, {20.0f, 0.0f, 10.0f});
+
+	factory->make_rat({0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 180.0f}, {180.0f, 180.0f, 180.0f});
 
 	unsigned int cameraEntity = factory->make_camera(
-		{0.0f, 0.0f, 1.0f}, {0.0f, 0.0f,0.0f});
+		{3.0f, 3.0f, 1.0f}, {0.0f, 0.0f, 0.0f});
 
 	CameraComponent* camera = new CameraComponent();
 	app->cameraComponent = camera;

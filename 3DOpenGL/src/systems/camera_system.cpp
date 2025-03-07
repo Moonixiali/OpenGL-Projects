@@ -5,6 +5,7 @@ CameraSystem::CameraSystem(unsigned int shader, GLFWwindow* window) {
 
     glUseProgram(shader);
     viewLocation = glGetUniformLocation(shader, "view");
+
 }
 
 bool CameraSystem::update(

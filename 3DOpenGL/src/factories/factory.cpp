@@ -52,12 +52,18 @@ void Factory::make_rat(glm::vec3 position, glm::vec3 eulers, glm::vec3 eulerVelo
 	transform.eulers = eulers;
 	transformComponents[entities_made] = transform;
 
+    glm::mat4 preTransform = glm::mat4(1.0f);
+    preTransform = glm::rotate(preTransform,
+        glm::radians(0.0f), {1.0f, 0.0f, 0.0f});
+    preTransform = glm::rotate(preTransform,
+        glm::radians(0.0f), {0.0f, 1.0f, 0.0f});
+
     PhysicsComponent physics;
 	physics.velocity = {0.0f, 0.0f, 0.0f};
 	physics.eulerVelocity = eulerVelocity;
 	physicsComponents[entities_made] = physics;
 	
-	RenderComponent render = make_obj_mesh("../models/rat.obj");
+	RenderComponent render = make_obj_mesh("../models/rat.obj", preTransform);
 	render.material = make_texture("../img/tex_rat.png");
 	renderComponents[entities_made++] = render;
 }
@@ -139,7 +145,7 @@ RenderComponent Factory::make_cube_mesh(glm::vec3 size) {
     return record;
 }
 
-RenderComponent Factory::make_obj_mesh(const char* filename) {
+RenderComponent Factory::make_obj_mesh(const char* filename, glm::mat4 preTransform) {
 
     std::vector<glm::vec3> v;
     std::vector<glm::vec2> vt;
@@ -184,13 +190,13 @@ RenderComponent Factory::make_obj_mesh(const char* filename) {
         words = split(line, " ");
 
         if (!words[0].compare("v")) {
-            v.push_back(read_vec3(words));
+            v.push_back(read_vec3(words, preTransform, 1.0));
         }
         else if (!words[0].compare("vt")) {
             vt.push_back(read_vec2(words));
         }
         else if (!words[0].compare("vn")) {
-            vn.push_back(read_vec3(words));
+            vn.push_back(read_vec3(words, preTransform, 0.0f));
         }
         else if (!words[0].compare("f")) {
             read_face(words, v, vt, vn, vertices);
@@ -235,8 +241,9 @@ glm::vec2 Factory::read_vec2(std::vector<std::string> words) {
 }
 
 
-glm::vec3 Factory::read_vec3(std::vector<std::string> words) {
-    return glm::vec3(std::stof(words[1]), std::stof(words[2]), std::stof(words[3]));
+glm::vec3 Factory::read_vec3(std::vector<std::string> words, glm::mat4 preTransform, float w) {
+    return glm::vec3(
+        preTransform * glm::vec4(std::stof(words[1]), std::stof(words[2]), std::stof(words[3]), w));
 }
 
 void Factory::read_face(std::vector<std::string> words,
