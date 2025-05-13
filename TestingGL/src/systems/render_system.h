@@ -14,14 +14,21 @@ public:
         ComponentSet<AnimationComponent> &animations);
     ~RenderSystem();
     
-    void update();
+    void update(float fps);
     
 private:
 
     void build_sky();
     void build_models();
     void build_geometry();
+    void build_imgui();
+    void build_ui(float fps);
 
+    //ui variables
+    float myColor[4] = {255, 255, 255, 255};
+    bool active;
+
+    //rendering variables
     std::vector<unsigned int>& shaders;
 
     std::vector<unsigned int> VAOs;

@@ -195,8 +195,51 @@ void RenderSystem::build_geometry() {
     textureFactory.load_into_array("../img/Tree_Texture.png", 3);
     textures[0] = textureFactory.finalize_texture_array();
 }
+
+void RenderSystem::build_ui(float fps) {
+    ImGui_ImplOpenGL3_NewFrame();
+    ImGui_ImplGlfw_NewFrame();
+    ImGui::NewFrame();
+
+    // the ui stuff
+    ImGui::Begin("evil imgui", &active, ImGuiWindowFlags_MenuBar);
+    if (ImGui::BeginMenuBar())
+    {
+    if (ImGui::BeginMenu("File"))
+    {
+        if (ImGui::MenuItem("Open..", "Ctrl+O")) { /* Do stuff */ }
+            if (ImGui::MenuItem("Save", "Ctrl+S"))   { /* Do stuff */ }
+        if (ImGui::MenuItem("Close", "Ctrl+W"))  { active = false; }
+            ImGui::EndMenu();
+        }
+        ImGui::EndMenuBar();
+    }
+
+    // color
+    ImGui::ColorEdit4("evil color", myColor);
+
+    // sine wave
+    float samples[100];
+    for (int n = 0; n < 100; n++)
+        samples[n] = sinf(n * 0.2f + ImGui::GetTime() * 1.5f);
+    ImGui::PlotLines("evil sine wave", samples, 100);
+
+    // scrolling region
+    std::string fpsStr;
+    fpsStr = ("FPS: " + std::to_string(fps));
+    ImGui::TextColored(ImVec4(myColor[0], myColor[1], myColor[2], myColor[3]), fpsStr.c_str());
+    // std::cout << "Red: " << myColor[0] << " Green: " << myColor[1] << " Blue: " << myColor[2] << " Alpha: " << myColor[3] << std::endl;
+    ImGui::BeginChild("scrolling");
+    for (int n = 0; n < 10; n++)
+    ImGui::Text("%04d: evil text", n);
+    ImGui::EndChild();
+    ImGui::End();
+
+    ImGui::Render();
+    ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+}
     
-void RenderSystem::update() {
+void RenderSystem::update(float fps) {
     
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -208,7 +251,7 @@ void RenderSystem::update() {
     glDrawArrays(GL_TRIANGLES, 0, 6);
     glEnable(GL_DEPTH_TEST);
 
-    //Static geometry
+    //Static geometry objects
     glUseProgram(shaders[1]); 
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D_ARRAY, textures[0]);
@@ -254,6 +297,7 @@ void RenderSystem::update() {
                 + frame * elementCount);
         glDrawElements(GL_TRIANGLES, elementCount, GL_UNSIGNED_INT, 
             (void*)(offset));
+
+        build_ui(fps);
     }
-	glfwSwapBuffers(window);
 }

@@ -28,6 +28,14 @@ add_executable(hello_window
     src/systems/render_system.cpp
     src/view/shader.cpp
     src/controller/app.cpp
+
+    dependencies/imgui/imgui_impl_glfw.cpp
+    dependencies/imgui/imgui_impl_opengl3.cpp
+    dependencies/imgui/imgui.cpp
+    dependencies/imgui/imgui_widgets.cpp
+    dependencies/imgui/imgui_draw.cpp
+    dependencies/imgui/imgui_tables.cpp
+    dependencies/imgui/imgui_demo.cpp
 )
 
 target_include_directories(hello_window 

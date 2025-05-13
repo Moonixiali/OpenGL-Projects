@@ -68,7 +68,7 @@ public:
         while (i > 0 && entities[i - 1] >= entity) {
             entities[i] = entities[i - 1];
             components[i] = components[i - 1];
-            //--i;
+            --i;
         }
         entities[i] = entity;
         components[i] = component;

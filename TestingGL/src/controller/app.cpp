@@ -2,6 +2,7 @@
 
 App::App() {
     set_up_glfw();
+	set_up_imgui();
 }
 
 App::~App() {
@@ -13,6 +14,10 @@ App::~App() {
     delete motionSystem;
     delete cameraSystem;
     delete renderSystem;
+
+	ImGui_ImplOpenGL3_Shutdown();
+	ImGui_ImplGlfw_Shutdown();
+	ImGui::DestroyContext();
     
     glfwTerminate();
 }
@@ -21,7 +26,7 @@ void App::run() {
 
 	speed = 10.0f;
 	tFromFrame = 0.0f;
-	fpsLimit = 120.0f;
+	fpsLimit = 100000.0f;
 	lTime = 0;
 
     while (!glfwWindowShouldClose(window)) {
@@ -30,9 +35,10 @@ void App::run() {
 		elapTime += cTime - lTime;
 		lTime = cTime;
 		if (elapTime >= 1.0f/fpsLimit) {
+			fpsCurrent = 1.0f/elapTime;
 
 			std::stringstream title;
-			title << "Running at " << (1.0f/elapTime) << " fps.";
+			title << "Running at " << (fpsCurrent) << " fps.";
 			glfwSetWindowTitle(window, title.str().c_str());
 			elapTime = 0.0f;
 			//std::cout << "generating frame, elap is: " << elapTime << std::endl;
@@ -43,8 +49,8 @@ void App::run() {
 			}
 			animationSystem->update(tFromFrame * 1000.0f);
 	
-			renderSystem->update();
-			
+			renderSystem->update(fpsCurrent);
+			glfwSwapBuffers(window);
 			time_since_frame();
 		}
 	}
@@ -68,6 +74,17 @@ void App::set_up_glfw() {
 		glfwTerminate();
 	}
 
+}
+
+void App::set_up_imgui() {
+
+	IMGUI_CHECKVERSION();
+	ImGui::CreateContext();
+	ImGui::StyleColorsDark();
+
+	ImGui_ImplGlfw_InitForOpenGL(window, true);
+	const char* glsl_version = "#version 130";
+	ImGui_ImplOpenGL3_Init(glsl_version);
 }
 
 void App::set_up_opengl() {

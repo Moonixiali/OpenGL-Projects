@@ -32,6 +32,7 @@ public:
     
 private:
     void set_up_glfw();
+    void set_up_imgui();
     void time_since_frame();
 
     GLFWwindow* window;
@@ -47,7 +48,7 @@ private:
     //Timing
     double tFromFrame, fCurrentTime, fLastTime;
 
-    float fpsLimit;
+    float fpsLimit, fpsCurrent;
     float cTime, lTime, elapTime;
 
     //Camera

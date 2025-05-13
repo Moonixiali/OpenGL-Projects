@@ -84,7 +84,7 @@ rule CUSTOM_COMMAND
 # Rule for re-running cmake.
 
 rule RERUN_CMAKE
-  command = /usr/bin/cmake --regenerate-during-build -S/home/moonixiali/Documents/OpenGL-Projects/TestingGL -B/home/moonixiali/Documents/OpenGL-Projects/TestingGL/build
+  command = /usr/bin/cmake --regenerate-during-build -S/home/moonixiali/Documents/B2/OpenGL-Projects/TestingGL -B/home/moonixiali/Documents/B2/OpenGL-Projects/TestingGL/build
   description = Re-running CMake...
   generator = 1
 
