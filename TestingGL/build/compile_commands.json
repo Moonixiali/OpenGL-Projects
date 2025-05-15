@@ -1,0 +1,116 @@
+[
+{
+  "directory": "/home/moonixiali/Documents/OpenGL-Projects/TestingGL/build",
+  "command": "/usr/bin/g++ -I/home/moonixiali/Documents/OpenGL-Projects/TestingGL/dependencies -Wall -Wextra -g -std=gnu++20 -o CMakeFiles/hello_window.dir/src/config.cpp.o -c /home/moonixiali/Documents/OpenGL-Projects/TestingGL/src/config.cpp",
+  "file": "/home/moonixiali/Documents/OpenGL-Projects/TestingGL/src/config.cpp",
+  "output": "CMakeFiles/hello_window.dir/src/config.cpp.o"
+},
+{
+  "directory": "/home/moonixiali/Documents/OpenGL-Projects/TestingGL/build",
+  "command": "/usr/bin/g++ -I/home/moonixiali/Documents/OpenGL-Projects/TestingGL/dependencies -Wall -Wextra -g -std=gnu++20 -o CMakeFiles/hello_window.dir/src/main.cpp.o -c /home/moonixiali/Documents/OpenGL-Projects/TestingGL/src/main.cpp",
+  "file": "/home/moonixiali/Documents/OpenGL-Projects/TestingGL/src/main.cpp",
+  "output": "CMakeFiles/hello_window.dir/src/main.cpp.o"
+},
+{
+  "directory": "/home/moonixiali/Documents/OpenGL-Projects/TestingGL/build",
+  "command": "/usr/bin/gcc -I/home/moonixiali/Documents/OpenGL-Projects/TestingGL/dependencies -g -o CMakeFiles/hello_window.dir/src/glad.c.o -c /home/moonixiali/Documents/OpenGL-Projects/TestingGL/src/glad.c",
+  "file": "/home/moonixiali/Documents/OpenGL-Projects/TestingGL/src/glad.c",
+  "output": "CMakeFiles/hello_window.dir/src/glad.c.o"
+},
+{
+  "directory": "/home/moonixiali/Documents/OpenGL-Projects/TestingGL/build",
+  "command": "/usr/bin/g++ -I/home/moonixiali/Documents/OpenGL-Projects/TestingGL/dependencies -Wall -Wextra -g -std=gnu++20 -o CMakeFiles/hello_window.dir/src/factories/factory.cpp.o -c /home/moonixiali/Documents/OpenGL-Projects/TestingGL/src/factories/factory.cpp",
+  "file": "/home/moonixiali/Documents/OpenGL-Projects/TestingGL/src/factories/factory.cpp",
+  "output": "CMakeFiles/hello_window.dir/src/factories/factory.cpp.o"
+},
+{
+  "directory": "/home/moonixiali/Documents/OpenGL-Projects/TestingGL/build",
+  "command": "/usr/bin/g++ -I/home/moonixiali/Documents/OpenGL-Projects/TestingGL/dependencies -Wall -Wextra -g -std=gnu++20 -o CMakeFiles/hello_window.dir/src/factories/mesh_factory.cpp.o -c /home/moonixiali/Documents/OpenGL-Projects/TestingGL/src/factories/mesh_factory.cpp",
+  "file": "/home/moonixiali/Documents/OpenGL-Projects/TestingGL/src/factories/mesh_factory.cpp",
+  "output": "CMakeFiles/hello_window.dir/src/factories/mesh_factory.cpp.o"
+},
+{
+  "directory": "/home/moonixiali/Documents/OpenGL-Projects/TestingGL/build",
+  "command": "/usr/bin/g++ -I/home/moonixiali/Documents/OpenGL-Projects/TestingGL/dependencies -Wall -Wextra -g -std=gnu++20 -o CMakeFiles/hello_window.dir/src/factories/texture_factory.cpp.o -c /home/moonixiali/Documents/OpenGL-Projects/TestingGL/src/factories/texture_factory.cpp",
+  "file": "/home/moonixiali/Documents/OpenGL-Projects/TestingGL/src/factories/texture_factory.cpp",
+  "output": "CMakeFiles/hello_window.dir/src/factories/texture_factory.cpp.o"
+},
+{
+  "directory": "/home/moonixiali/Documents/OpenGL-Projects/TestingGL/build",
+  "command": "/usr/bin/g++ -I/home/moonixiali/Documents/OpenGL-Projects/TestingGL/dependencies -Wall -Wextra -g -std=gnu++20 -o CMakeFiles/hello_window.dir/src/systems/animation_system.cpp.o -c /home/moonixiali/Documents/OpenGL-Projects/TestingGL/src/systems/animation_system.cpp",
+  "file": "/home/moonixiali/Documents/OpenGL-Projects/TestingGL/src/systems/animation_system.cpp",
+  "output": "CMakeFiles/hello_window.dir/src/systems/animation_system.cpp.o"
+},
+{
+  "directory": "/home/moonixiali/Documents/OpenGL-Projects/TestingGL/build",
+  "command": "/usr/bin/g++ -I/home/moonixiali/Documents/OpenGL-Projects/TestingGL/dependencies -Wall -Wextra -g -std=gnu++20 -o CMakeFiles/hello_window.dir/src/systems/camera_system.cpp.o -c /home/moonixiali/Documents/OpenGL-Projects/TestingGL/src/systems/camera_system.cpp",
+  "file": "/home/moonixiali/Documents/OpenGL-Projects/TestingGL/src/systems/camera_system.cpp",
+  "output": "CMakeFiles/hello_window.dir/src/systems/camera_system.cpp.o"
+},
+{
+  "directory": "/home/moonixiali/Documents/OpenGL-Projects/TestingGL/build",
+  "command": "/usr/bin/g++ -I/home/moonixiali/Documents/OpenGL-Projects/TestingGL/dependencies -Wall -Wextra -g -std=gnu++20 -o CMakeFiles/hello_window.dir/src/systems/motion_system.cpp.o -c /home/moonixiali/Documents/OpenGL-Projects/TestingGL/src/systems/motion_system.cpp",
+  "file": "/home/moonixiali/Documents/OpenGL-Projects/TestingGL/src/systems/motion_system.cpp",
+  "output": "CMakeFiles/hello_window.dir/src/systems/motion_system.cpp.o"
+},
+{
+  "directory": "/home/moonixiali/Documents/OpenGL-Projects/TestingGL/build",
+  "command": "/usr/bin/g++ -I/home/moonixiali/Documents/OpenGL-Projects/TestingGL/dependencies -Wall -Wextra -g -std=gnu++20 -o CMakeFiles/hello_window.dir/src/systems/render_system.cpp.o -c /home/moonixiali/Documents/OpenGL-Projects/TestingGL/src/systems/render_system.cpp",
+  "file": "/home/moonixiali/Documents/OpenGL-Projects/TestingGL/src/systems/render_system.cpp",
+  "output": "CMakeFiles/hello_window.dir/src/systems/render_system.cpp.o"
+},
+{
+  "directory": "/home/moonixiali/Documents/OpenGL-Projects/TestingGL/build",
+  "command": "/usr/bin/g++ -I/home/moonixiali/Documents/OpenGL-Projects/TestingGL/dependencies -Wall -Wextra -g -std=gnu++20 -o CMakeFiles/hello_window.dir/src/view/shader.cpp.o -c /home/moonixiali/Documents/OpenGL-Projects/TestingGL/src/view/shader.cpp",
+  "file": "/home/moonixiali/Documents/OpenGL-Projects/TestingGL/src/view/shader.cpp",
+  "output": "CMakeFiles/hello_window.dir/src/view/shader.cpp.o"
+},
+{
+  "directory": "/home/moonixiali/Documents/OpenGL-Projects/TestingGL/build",
+  "command": "/usr/bin/g++ -I/home/moonixiali/Documents/OpenGL-Projects/TestingGL/dependencies -Wall -Wextra -g -std=gnu++20 -o CMakeFiles/hello_window.dir/src/controller/app.cpp.o -c /home/moonixiali/Documents/OpenGL-Projects/TestingGL/src/controller/app.cpp",
+  "file": "/home/moonixiali/Documents/OpenGL-Projects/TestingGL/src/controller/app.cpp",
+  "output": "CMakeFiles/hello_window.dir/src/controller/app.cpp.o"
+},
+{
+  "directory": "/home/moonixiali/Documents/OpenGL-Projects/TestingGL/build",
+  "command": "/usr/bin/g++ -I/home/moonixiali/Documents/OpenGL-Projects/TestingGL/dependencies -Wall -Wextra -g -std=gnu++20 -o CMakeFiles/hello_window.dir/dependencies/imgui/imgui_impl_glfw.cpp.o -c /home/moonixiali/Documents/OpenGL-Projects/TestingGL/dependencies/imgui/imgui_impl_glfw.cpp",
+  "file": "/home/moonixiali/Documents/OpenGL-Projects/TestingGL/dependencies/imgui/imgui_impl_glfw.cpp",
+  "output": "CMakeFiles/hello_window.dir/dependencies/imgui/imgui_impl_glfw.cpp.o"
+},
+{
+  "directory": "/home/moonixiali/Documents/OpenGL-Projects/TestingGL/build",
+  "command": "/usr/bin/g++ -I/home/moonixiali/Documents/OpenGL-Projects/TestingGL/dependencies -Wall -Wextra -g -std=gnu++20 -o CMakeFiles/hello_window.dir/dependencies/imgui/imgui_impl_opengl3.cpp.o -c /home/moonixiali/Documents/OpenGL-Projects/TestingGL/dependencies/imgui/imgui_impl_opengl3.cpp",
+  "file": "/home/moonixiali/Documents/OpenGL-Projects/TestingGL/dependencies/imgui/imgui_impl_opengl3.cpp",
+  "output": "CMakeFiles/hello_window.dir/dependencies/imgui/imgui_impl_opengl3.cpp.o"
+},
+{
+  "directory": "/home/moonixiali/Documents/OpenGL-Projects/TestingGL/build",
+  "command": "/usr/bin/g++ -I/home/moonixiali/Documents/OpenGL-Projects/TestingGL/dependencies -Wall -Wextra -g -std=gnu++20 -o CMakeFiles/hello_window.dir/dependencies/imgui/imgui.cpp.o -c /home/moonixiali/Documents/OpenGL-Projects/TestingGL/dependencies/imgui/imgui.cpp",
+  "file": "/home/moonixiali/Documents/OpenGL-Projects/TestingGL/dependencies/imgui/imgui.cpp",
+  "output": "CMakeFiles/hello_window.dir/dependencies/imgui/imgui.cpp.o"
+},
+{
+  "directory": "/home/moonixiali/Documents/OpenGL-Projects/TestingGL/build",
+  "command": "/usr/bin/g++ -I/home/moonixiali/Documents/OpenGL-Projects/TestingGL/dependencies -Wall -Wextra -g -std=gnu++20 -o CMakeFiles/hello_window.dir/dependencies/imgui/imgui_widgets.cpp.o -c /home/moonixiali/Documents/OpenGL-Projects/TestingGL/dependencies/imgui/imgui_widgets.cpp",
+  "file": "/home/moonixiali/Documents/OpenGL-Projects/TestingGL/dependencies/imgui/imgui_widgets.cpp",
+  "output": "CMakeFiles/hello_window.dir/dependencies/imgui/imgui_widgets.cpp.o"
+},
+{
+  "directory": "/home/moonixiali/Documents/OpenGL-Projects/TestingGL/build",
+  "command": "/usr/bin/g++ -I/home/moonixiali/Documents/OpenGL-Projects/TestingGL/dependencies -Wall -Wextra -g -std=gnu++20 -o CMakeFiles/hello_window.dir/dependencies/imgui/imgui_draw.cpp.o -c /home/moonixiali/Documents/OpenGL-Projects/TestingGL/dependencies/imgui/imgui_draw.cpp",
+  "file": "/home/moonixiali/Documents/OpenGL-Projects/TestingGL/dependencies/imgui/imgui_draw.cpp",
+  "output": "CMakeFiles/hello_window.dir/dependencies/imgui/imgui_draw.cpp.o"
+},
+{
+  "directory": "/home/moonixiali/Documents/OpenGL-Projects/TestingGL/build",
+  "command": "/usr/bin/g++ -I/home/moonixiali/Documents/OpenGL-Projects/TestingGL/dependencies -Wall -Wextra -g -std=gnu++20 -o CMakeFiles/hello_window.dir/dependencies/imgui/imgui_tables.cpp.o -c /home/moonixiali/Documents/OpenGL-Projects/TestingGL/dependencies/imgui/imgui_tables.cpp",
+  "file": "/home/moonixiali/Documents/OpenGL-Projects/TestingGL/dependencies/imgui/imgui_tables.cpp",
+  "output": "CMakeFiles/hello_window.dir/dependencies/imgui/imgui_tables.cpp.o"
+},
+{
+  "directory": "/home/moonixiali/Documents/OpenGL-Projects/TestingGL/build",
+  "command": "/usr/bin/g++ -I/home/moonixiali/Documents/OpenGL-Projects/TestingGL/dependencies -Wall -Wextra -g -std=gnu++20 -o CMakeFiles/hello_window.dir/dependencies/imgui/imgui_demo.cpp.o -c /home/moonixiali/Documents/OpenGL-Projects/TestingGL/dependencies/imgui/imgui_demo.cpp",
+  "file": "/home/moonixiali/Documents/OpenGL-Projects/TestingGL/dependencies/imgui/imgui_demo.cpp",
+  "output": "CMakeFiles/hello_window.dir/dependencies/imgui/imgui_demo.cpp.o"
+}
+]

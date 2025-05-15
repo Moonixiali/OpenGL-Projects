@@ -33,8 +33,13 @@ private:
     glm::vec3 rotation = {0, 0, 0};
     glm::vec3 velocity = {0, 0, 0};
     bool active;
-    float speedNew = 0;
+    float speedNew = 10.0f;
     int objectType = 0;
+
+    int objectsToCreate;
+    glm::vec3 boundsPos = {0, 0, 0};
+    glm::vec3 boundsRot = {0, 0, 0};
+    glm::vec3 boundsVel = {0, 0, 0};
  /* eSphere 0
     eRevy 1
     eRat 2 */

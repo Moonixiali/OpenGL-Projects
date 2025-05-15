@@ -204,12 +204,10 @@ void RenderSystem::build_ui(float fps, CameraSystem* camera, Factory* factory) {
     ImGui::NewFrame();
 
     // the ui stuff
-    ImGui::Begin("evil imgui", &active, ImGuiWindowFlags_MenuBar);
-    if (ImGui::BeginMenuBar())
-    {
-    if (ImGui::BeginMenu("Menu"))
-    {
-        if (ImGui::MenuItem("Create Sphere", "Ctrl+W"))  { factory->make_sphere(
+    ImGui::Begin("imgui menu", &active, ImGuiWindowFlags_MenuBar);
+    if (ImGui::BeginMenuBar()) {
+    if (ImGui::BeginMenu("Menu")) {
+        if (ImGui::MenuItem("Create Sphere test", "Ctrl+W"))  { factory->make_sphere(
             {0.0f, 0.0f, 12.25f}, {0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 20.0f}); }
             ImGui::EndMenu();
         }
@@ -232,12 +230,14 @@ void RenderSystem::build_ui(float fps, CameraSystem* camera, Factory* factory) {
     ImGui::TextColored(ImVec4(myColor[0], myColor[1], myColor[2], myColor[3]), fpsStr.c_str());
     //speed setting
     ImGui::SliderFloat("speed", &speedNew, 0.0f, 50.0f);
-    if (ImGui::Button("Set speed")) {
+    if (ImGui::Button("Set camera speed")) {
         camera->change_speed(speedNew);
     }
     //object creation
     if (ImGui::CollapsingHeader("Object Creation")) {
+        ImGui::Indent(10);
         if (ImGui::CollapsingHeader("Object to create")) {
+            ImGui::Indent(10);
             if (ImGui::Button("Sphere")) {
                 objectType = 0;
             }
@@ -247,29 +247,95 @@ void RenderSystem::build_ui(float fps, CameraSystem* camera, Factory* factory) {
             if (ImGui::Button("Rat")) {
                 objectType = 2;
             }
+            ImGui::Unindent(10);
         }
-        ImGui::Text("Object Creation Variables");
-        ImGui::SliderFloat3("Position", &position.x, -20.0f, 20.0f);
-        ImGui::SliderFloat3("Rotation", &rotation.x, -20.0f, 20.0f);
-        ImGui::SliderFloat3("Velocity", &velocity.x, -20.0f, 20.0f);
-        if (ImGui::Button("Create Object")) {
-            if (objectType == 0) {
-                factory->make_sphere(
-                {position[0], position[1], position[2]},
-                {rotation[0], rotation[1], rotation[2]},
-                {velocity[0], velocity[1], velocity[2]});
+        if (ImGui::CollapsingHeader("Specific Object Creation")) {
+            ImGui::Indent(10);
+            ImGui::Text("Object Creation Variables");
+            ImGui::SliderFloat3("Position", &position.x, -20.0f, 20.0f);
+            ImGui::SliderFloat3("Rotation", &rotation.x, 0.0f, 360.0f);
+            ImGui::SliderFloat3("Velocity", &velocity.x, -360.0f, 360.0f);
+            if (ImGui::Button("Create Object")) {
+                if (objectType == 0) {
+                    factory->make_sphere(
+                    {position[0], position[1], position[2]},
+                    {rotation[0], rotation[1], rotation[2]},
+                    {velocity[0], velocity[1], velocity[2]});
+                }
+                else if (objectType == 1) {
+                    factory->make_revy(
+                    {position[0], position[1], position[2]},
+                    {rotation[0], rotation[1], rotation[2]});
+                }
+                else if (objectType == 2) {
+                    factory->make_rat(
+                    {position[0], position[1], position[2]},
+                    {rotation[0], rotation[1], rotation[2]},
+                    {velocity[0], velocity[1], velocity[2]});
+                }
             }
-            else if (objectType == 1) {
-                factory->make_revy(
-                {position[0], position[1], position[2]},
-                {rotation[0], rotation[1], rotation[2]});
+            ImGui::Unindent(10);
+        }
+        if (ImGui::CollapsingHeader("Random Object Creation")) {
+            ImGui::Indent(10);
+            ImGui::SliderInt("Count", &objectsToCreate, 0, 10000);
+            ImGui::SliderFloat3("Position bounds", &boundsPos.x, 0, 100);
+            ImGui::SliderFloat3("Rotation bounds", &boundsRot.x, 0, 360);
+            ImGui::SliderFloat3("Velocity bounds", &boundsVel.x, 0, 360);
+            if (ImGui::Button("Create Random Objects")) {
+                srand (time(NULL));
+                if (objectType == 0) {
+                    for (int i = 0; i < 10000; i=i+1) {
+                        float posx = -boundsPos[0] + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX/(boundsPos[0]*2)));
+                        float posy = -boundsPos[1] + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX/(boundsPos[1]*2)));
+                        float posz = -boundsPos[2] + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX/(boundsPos[2]*2)));
+                        float rotx = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX/boundsRot[0]));
+                        float roty = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX/boundsRot[1]));
+                        float rotz = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX/boundsRot[2]));
+                        float spinx = -boundsVel[0] + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX/(boundsVel[0]*2)));
+                        float spiny = -boundsVel[1] + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX/(boundsVel[0]*2)));
+                        float spinz = -boundsVel[2] + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX/(boundsVel[0]*2)));
+
+                        factory->make_sphere(
+                        {posx, posy, posz},
+                        {rotx, roty, rotz},
+                        {spinx, spiny, spinz});
+                    }
+                }
+                else if (objectType == 1) {
+                    for (int i = 0; i < 10000; i=i+1) {
+                        float posx = -boundsPos[0] + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX/(boundsPos[0]*2)));
+                        float posy = -boundsPos[1] + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX/(boundsPos[1]*2)));
+                        float posz = -boundsPos[2] + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX/(boundsPos[2]*2)));
+                        float rotx = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX/boundsRot[0]));
+                        float roty = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX/boundsRot[1]));
+                        float rotz = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX/boundsRot[2]));
+                        
+                        factory->make_revy(
+                        {posx, posy, posz},
+                        {rotx, roty, rotz});
+                    }
+                }
+                else if (objectType == 2) {
+                    for (int i = 0; i < 10000; i=i+1) {
+                        float posx = -boundsPos[0] + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX/(boundsPos[0]*2)));
+                        float posy = -boundsPos[1] + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX/(boundsPos[1]*2)));
+                        float posz = -boundsPos[2] + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX/(boundsPos[2]*2)));
+                        float rotx = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX/boundsRot[0]));
+                        float roty = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX/boundsRot[1]));
+                        float rotz = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX/boundsRot[2]));
+                        float spinx = -boundsVel[0] + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX/(boundsVel[0]*2)));
+                        float spiny = -boundsVel[1] + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX/(boundsVel[0]*2)));
+                        float spinz = -boundsVel[2] + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX/(boundsVel[0]*2)));
+                        
+                        factory->make_rat(
+                        {posx, posy, posz},
+                        {rotx, roty, rotz},
+                        {spinx, spiny, spinz});
+                    }
+                }
             }
-            else if (objectType == 2) {
-                factory->make_rat(
-                {position[0], position[1], position[2]},
-                {rotation[0], rotation[1], rotation[2]},
-                {velocity[0], velocity[1], velocity[2]});
-            }
+            ImGui::Unindent(10);
         }
     }
     ImGui::End();
