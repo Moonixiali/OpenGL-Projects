@@ -1,9 +1,12 @@
 #pragma once
 #include "../config.h"
+
 #include "../components/transform_component.h"
 #include "../components/render_component.h"
 #include "../components/animation_component.h"
 #include "../components/component_set.h"
+#include "../factories/factory.h"
+#include "../systems/camera_system.h"
 
 class RenderSystem {
 public:
@@ -14,7 +17,8 @@ public:
         ComponentSet<AnimationComponent> &animations);
     ~RenderSystem();
     
-    void update(float fps);
+    void update();
+    void build_ui(float fps, CameraSystem* camera, Factory* factory);
     
 private:
 
@@ -22,11 +26,14 @@ private:
     void build_models();
     void build_geometry();
     void build_imgui();
-    void build_ui(float fps);
 
     //ui variables
     float myColor[4] = {255, 255, 255, 255};
+    glm::vec3 position = {0, 0, 0};
+    glm::vec3 rotation = {0, 0, 0};
+    glm::vec3 velocity = {0, 0, 0};
     bool active;
+    float speedNew = 0;
 
     //rendering variables
     std::vector<unsigned int>& shaders;

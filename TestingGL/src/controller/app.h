@@ -2,9 +2,9 @@
 #include "../config.h"
 
 #include "../components/animation_component.h"
+#include "../components/render_component.h"
 #include "../components/camera_component.h"
 #include "../components/physics_component.h"
-#include "../components/render_component.h"
 #include "../components/transform_component.h"
 #include "../components/component_set.h"
 
@@ -14,12 +14,13 @@
 #include "../systems/render_system.h"
 
 #include "../view/shader.h"
+#include "../factories/factory.h"
 
 class App {
 public:
     App();
     ~App();
-    void run();
+    void run(Factory* factory);
     void set_up_opengl();
     void make_systems();
 

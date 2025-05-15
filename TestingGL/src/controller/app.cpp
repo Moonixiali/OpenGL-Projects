@@ -22,7 +22,7 @@ App::~App() {
     glfwTerminate();
 }
 
-void App::run() {
+void App::run(Factory* factory) {
 
 	speed = 10.0f;
 	tFromFrame = 0.0f;
@@ -38,18 +38,19 @@ void App::run() {
 			fpsCurrent = 1.0f/elapTime;
 
 			std::stringstream title;
-			title << "Running at " << (fpsCurrent) << " fps.";
+			title << "the window";
 			glfwSetWindowTitle(window, title.str().c_str());
 			elapTime = 0.0f;
-			//std::cout << "generating frame, elap is: " << elapTime << std::endl;
 			motionSystem->update(tFromFrame);
-			bool should_close = cameraSystem->update(tFromFrame, speed);
+			bool should_close = cameraSystem->update(tFromFrame);
 			if (should_close) {
 				break;
 			}
 			animationSystem->update(tFromFrame * 1000.0f);
 	
-			renderSystem->update(fpsCurrent);
+			renderSystem->update();
+			renderSystem->build_ui(fpsCurrent, cameraSystem, factory);
+
 			glfwSwapBuffers(window);
 			time_since_frame();
 		}
@@ -64,7 +65,7 @@ void App::set_up_glfw() {
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GLFW_TRUE);
 	
-	window = glfwCreateWindow(1280, 720, "evil geometry", NULL, NULL);
+	window = glfwCreateWindow(1280, 720, "window", NULL, NULL);
 	glfwMakeContextCurrent(window);
 	glfwSwapInterval(0);
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);

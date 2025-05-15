@@ -27,7 +27,7 @@ cameras(cameras) {
 
 double previousTime = 0;
 
-bool CameraSystem::update(float dt, float speed) {
+bool CameraSystem::update(float dt) {
 
     CameraComponent& camera = cameras.components[0];
     uint32_t cameraID = cameras.entities[0];
@@ -86,27 +86,36 @@ bool CameraSystem::update(float dt, float speed) {
         return true;
     }
 
+    //when right click is held, this runs every frame
     if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_PRESS) {
 
+        //find centre of the window and store as centerX and centerY
         int windowWidth, windowHeight;
         glfwGetWindowSize(window, &windowWidth, &windowHeight);
         double centerX = windowWidth / 2.0;
         double centerY = windowHeight / 2.0;
 
+        //disable cursor visibility and put the cursor to the centre of the screen
         glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
         glfwSetCursorPos(window, centerX, centerY);
 
+        //update cursor position in program
         glfwPollEvents();
 
+        //get cursor position, remember that the center is 0.0, 0.0
         glm::vec3 dEulers = {0.0f, 0.0f, 0.0f};
         double mouse_x, mouse_y;
         glfwGetCursorPos(window, &mouse_x, &mouse_y);
 
+        //move the camera rotation by however much the mouse has moved this frame
+        //from the centre
         dEulers.z = -0.1f * static_cast<float>(mouse_x - centerX);
         dEulers.y = -0.1f * static_cast<float>(mouse_y - centerY);
 
+        //prevent the camera rotation from going further than 89 degrees up and down
         eulers.y = fminf(89.0f, fmaxf(-89.0f, eulers.y + dEulers.y));
 
+        //normalize Z rotation to 0-360 if it goes further than 360 or lower than 0
         eulers.z += dEulers.z;
         if (eulers.z > 360) {
             eulers.z -= 360;
@@ -134,3 +143,7 @@ bool CameraSystem::update(float dt, float speed) {
 
     return false;
 }
+
+void CameraSystem::change_speed(float speedNew) {
+    speed = speedNew;
+};

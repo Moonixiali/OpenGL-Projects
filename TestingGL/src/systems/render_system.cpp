@@ -1,6 +1,8 @@
 #include "render_system.h"
 #include "../factories/mesh_factory.h"
 #include "../factories/texture_factory.h"
+#include "../factories/factory.h"
+#include "../controller/app.h"
 
 RenderSystem::RenderSystem(std::vector<unsigned int>& shaders, 
     GLFWwindow* window, ComponentSet<TransformComponent> &transforms,
@@ -196,7 +198,7 @@ void RenderSystem::build_geometry() {
     textures[0] = textureFactory.finalize_texture_array();
 }
 
-void RenderSystem::build_ui(float fps) {
+void RenderSystem::build_ui(float fps, CameraSystem* camera, Factory* factory) {
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplGlfw_NewFrame();
     ImGui::NewFrame();
@@ -205,11 +207,10 @@ void RenderSystem::build_ui(float fps) {
     ImGui::Begin("evil imgui", &active, ImGuiWindowFlags_MenuBar);
     if (ImGui::BeginMenuBar())
     {
-    if (ImGui::BeginMenu("File"))
+    if (ImGui::BeginMenu("Menu"))
     {
-        if (ImGui::MenuItem("Open..", "Ctrl+O")) { /* Do stuff */ }
-            if (ImGui::MenuItem("Save", "Ctrl+S"))   { /* Do stuff */ }
-        if (ImGui::MenuItem("Close", "Ctrl+W"))  { active = false; }
+        if (ImGui::MenuItem("Create Sphere", "Ctrl+W"))  { factory->make_sphere(
+            {0.0f, 0.0f, 12.25f}, {0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 20.0f}); }
             ImGui::EndMenu();
         }
         ImGui::EndMenuBar();
@@ -225,21 +226,34 @@ void RenderSystem::build_ui(float fps) {
     ImGui::PlotLines("evil sine wave", samples, 100);
 
     // scrolling region
+    //fps text
     std::string fpsStr;
     fpsStr = ("FPS: " + std::to_string(fps));
     ImGui::TextColored(ImVec4(myColor[0], myColor[1], myColor[2], myColor[3]), fpsStr.c_str());
-    // std::cout << "Red: " << myColor[0] << " Green: " << myColor[1] << " Blue: " << myColor[2] << " Alpha: " << myColor[3] << std::endl;
-    ImGui::BeginChild("scrolling");
-    for (int n = 0; n < 10; n++)
-    ImGui::Text("%04d: evil text", n);
-    ImGui::EndChild();
+    //speed setting
+    ImGui::SliderFloat("speed", &speedNew, 0.0f, 50.0f);
+    if (ImGui::Button("Set speed")) {
+        camera->change_speed(speedNew);
+    }
+    //sphere creation
+    ImGui::Text("Sphere Creation");
+    ImGui::SliderFloat3("Position", &position.x, -20.0f, 20.0f);
+    ImGui::SliderFloat3("Rotation", &rotation.x, -20.0f, 20.0f);
+    ImGui::SliderFloat3("Velocity", &velocity.x, -20.0f, 20.0f);
+    if (ImGui::Button("Create Sphere")) {
+        factory->make_sphere(
+            {position[0], position[1], position[2]},
+            {rotation[0], rotation[1], rotation[2]},
+            {velocity[0], velocity[1], velocity[2]});
+    }
     ImGui::End();
+
 
     ImGui::Render();
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
     
-void RenderSystem::update(float fps) {
+void RenderSystem::update() {
     
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -297,7 +311,5 @@ void RenderSystem::update(float fps) {
                 + frame * elementCount);
         glDrawElements(GL_TRIANGLES, elementCount, GL_UNSIGNED_INT, 
             (void*)(offset));
-
-        build_ui(fps);
     }
 }

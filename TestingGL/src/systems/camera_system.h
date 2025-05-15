@@ -11,7 +11,8 @@ public:
         ComponentSet<TransformComponent>& transforms, 
         ComponentSet<CameraComponent>& cameras);
     
-    bool update(float dt, float speed);
+    bool update(float dt);
+    void change_speed(float speedNew);
     
 private:
     std::vector<unsigned int>& shaders;
@@ -22,6 +23,8 @@ private:
     const glm::vec3 global_up = {0.0f, 0.0f, 1.0f};
     GLFWwindow* window;
     float dx, dy;
+
+    float speed;
 
     ComponentSet<TransformComponent>& transforms;
     ComponentSet<CameraComponent>& cameras;

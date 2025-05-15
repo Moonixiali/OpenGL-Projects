@@ -5,6 +5,7 @@
 
 #include "factories/factory.h"
 
+/* Main program function*/
 int main() {
 
 	App* app = new App();
@@ -39,7 +40,7 @@ int main() {
 	app->set_up_opengl();
 	app->make_systems();
 
-	app->run();
+	app->run(factory);
 
 	delete app;
 	return 0;
