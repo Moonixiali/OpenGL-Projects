@@ -26,7 +26,7 @@ void App::run(Factory* factory) {
 
 	speed = 10.0f;
 	tFromFrame = 0.0f;
-	fpsLimit = 100000.0f;
+	fpsLimit = 10000.0f;
 	lTime = 0;
 
     while (!glfwWindowShouldClose(window)) {

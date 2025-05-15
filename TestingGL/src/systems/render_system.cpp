@@ -235,16 +235,42 @@ void RenderSystem::build_ui(float fps, CameraSystem* camera, Factory* factory) {
     if (ImGui::Button("Set speed")) {
         camera->change_speed(speedNew);
     }
-    //sphere creation
-    ImGui::Text("Sphere Creation");
-    ImGui::SliderFloat3("Position", &position.x, -20.0f, 20.0f);
-    ImGui::SliderFloat3("Rotation", &rotation.x, -20.0f, 20.0f);
-    ImGui::SliderFloat3("Velocity", &velocity.x, -20.0f, 20.0f);
-    if (ImGui::Button("Create Sphere")) {
-        factory->make_sphere(
-            {position[0], position[1], position[2]},
-            {rotation[0], rotation[1], rotation[2]},
-            {velocity[0], velocity[1], velocity[2]});
+    //object creation
+    if (ImGui::CollapsingHeader("Object Creation")) {
+        if (ImGui::CollapsingHeader("Object to create")) {
+            if (ImGui::Button("Sphere")) {
+                objectType = 0;
+            }
+            if (ImGui::Button("Character")) {
+                objectType = 1;
+            }
+            if (ImGui::Button("Rat")) {
+                objectType = 2;
+            }
+        }
+        ImGui::Text("Object Creation Variables");
+        ImGui::SliderFloat3("Position", &position.x, -20.0f, 20.0f);
+        ImGui::SliderFloat3("Rotation", &rotation.x, -20.0f, 20.0f);
+        ImGui::SliderFloat3("Velocity", &velocity.x, -20.0f, 20.0f);
+        if (ImGui::Button("Create Object")) {
+            if (objectType == 0) {
+                factory->make_sphere(
+                {position[0], position[1], position[2]},
+                {rotation[0], rotation[1], rotation[2]},
+                {velocity[0], velocity[1], velocity[2]});
+            }
+            else if (objectType == 1) {
+                factory->make_revy(
+                {position[0], position[1], position[2]},
+                {rotation[0], rotation[1], rotation[2]});
+            }
+            else if (objectType == 2) {
+                factory->make_rat(
+                {position[0], position[1], position[2]},
+                {rotation[0], rotation[1], rotation[2]},
+                {velocity[0], velocity[1], velocity[2]});
+            }
+        }
     }
     ImGui::End();
 

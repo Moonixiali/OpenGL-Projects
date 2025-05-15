@@ -34,6 +34,10 @@ private:
     glm::vec3 velocity = {0, 0, 0};
     bool active;
     float speedNew = 0;
+    int objectType = 0;
+ /* eSphere 0
+    eRevy 1
+    eRat 2 */
 
     //rendering variables
     std::vector<unsigned int>& shaders;
