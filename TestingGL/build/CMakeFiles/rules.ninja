@@ -84,7 +84,7 @@ rule CUSTOM_COMMAND
 # Rule for re-running cmake.
 
 rule RERUN_CMAKE
-  command = /usr/bin/cmake --regenerate-during-build -S/home/moonixiali/Documents/OpenGL-Projects/TestingGL -B/home/moonixiali/Documents/OpenGL-Projects/TestingGL/build
+  command = /usr/bin/cmake --regenerate-during-build -S/home/moonixiali/Documents/B2/OpenGL-Projects/TestingGL -B/home/moonixiali/Documents/B2/OpenGL-Projects/TestingGL/build
   description = Re-running CMake...
   generator = 1
 
@@ -93,7 +93,7 @@ rule RERUN_CMAKE
 # Rule for cleaning all built files.
 
 rule CLEAN
-  command = /home/moonixiali/.vscode-oss/extensions/kylinideteam.kylin-cmake-tools-0.0.4-universal/res/ninja/linux-x64/ninja $FILE_ARG -t clean $TARGETS
+  command = /usr/bin/ninja $FILE_ARG -t clean $TARGETS
   description = Cleaning all built files...
 
 
@@ -101,6 +101,6 @@ rule CLEAN
 # Rule for printing all primary targets available.
 
 rule HELP
-  command = /home/moonixiali/.vscode-oss/extensions/kylinideteam.kylin-cmake-tools-0.0.4-universal/res/ninja/linux-x64/ninja -t targets
+  command = /usr/bin/ninja -t targets
   description = All primary targets available:
 

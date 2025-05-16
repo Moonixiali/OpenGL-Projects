@@ -3,6 +3,7 @@
 #include "../factories/texture_factory.h"
 #include "../factories/factory.h"
 #include "../controller/app.h"
+#include "../components/component_set.h"
 
 RenderSystem::RenderSystem(std::vector<unsigned int>& shaders, 
     GLFWwindow* window, ComponentSet<TransformComponent> &transforms,
@@ -337,6 +338,23 @@ void RenderSystem::build_ui(float fps, CameraSystem* camera, Factory* factory) {
             }
             ImGui::Unindent(10);
         }
+    }
+    if (ImGui::CollapsingHeader("Object Deletion")) {
+        ImGui::Indent(10);
+        if (ImGui::CollapsingHeader("Objects")) {
+            int objectsN = (factory->get_object_count());
+            for (int i = 0; i < objectsN; i++) {
+                std::string objType = factory->get_render_component_name(i);
+                std::string objNr = "%04d: ";
+                std::string finalStr = objNr + objType;
+                ImGui::Text(finalStr.c_str(), i);
+            }
+        }
+        ImGui::InputInt("ID", &objectDeleteId);
+        if (ImGui::Button("Delete Object")) {
+            factory->destroy_object(objectDeleteId);
+        }
+        ImGui::Unindent(10);
     }
     ImGui::End();
 

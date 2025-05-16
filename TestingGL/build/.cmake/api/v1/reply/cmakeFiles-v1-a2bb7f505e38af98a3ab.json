@@ -21,6 +21,11 @@
 		{
 			"isCMake" : true,
 			"isExternal" : true,
+			"path" : "/usr/share/cmake/Modules/CMakeNinjaFindMake.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
 			"path" : "/usr/share/cmake/Modules/CMakeSystemSpecificInitialize.cmake"
 		},
 		{
@@ -888,8 +893,8 @@
 	"kind" : "cmakeFiles",
 	"paths" : 
 	{
-		"build" : "/home/moonixiali/Documents/OpenGL-Projects/TestingGL/build",
-		"source" : "/home/moonixiali/Documents/OpenGL-Projects/TestingGL"
+		"build" : "/home/moonixiali/Documents/B2/OpenGL-Projects/TestingGL/build",
+		"source" : "/home/moonixiali/Documents/B2/OpenGL-Projects/TestingGL"
 	},
 	"version" : 
 	{

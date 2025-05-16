@@ -34,9 +34,6 @@ int main() {
 	
 	factory->make_rat(
 		{-3.0f, -3.0f, 3.0f}, {0.0f, 0.0f, 0.0f}, {90.0f, 180.0f, 360.f});
-
-	factory->make_camera(
-		{0.0f, 0.0f, 1.0f}, {0.0f, 0.0f,0.0f});
 	
 	/* the army
 	uncommenting this loop will create 100 uniformally spaced rats */

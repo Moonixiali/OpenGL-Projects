@@ -55,7 +55,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/home/moonixiali/Documents/OpenGL-Projects/TestingGL/build"
+			"value" : "/home/moonixiali/Documents/B2/OpenGL-Projects/TestingGL/build"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -555,7 +555,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/home/moonixiali/Documents/OpenGL-Projects/TestingGL/build/CMakeFiles/pkgRedirects"
+			"value" : "/home/moonixiali/Documents/B2/OpenGL-Projects/TestingGL/build/CMakeFiles/pkgRedirects"
 		},
 		{
 			"name" : "CMAKE_GENERATOR",
@@ -615,7 +615,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/home/moonixiali/Documents/OpenGL-Projects/TestingGL"
+			"value" : "/home/moonixiali/Documents/B2/OpenGL-Projects/TestingGL"
 		},
 		{
 			"name" : "CMAKE_INSTALL_PREFIX",
@@ -674,12 +674,16 @@
 			"properties" : 
 			[
 				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
 					"name" : "HELPSTRING",
-					"value" : "No help, variable specified on the command line."
+					"value" : "Program used to build from build.ninja files."
 				}
 			],
-			"type" : "UNINITIALIZED",
-			"value" : "/home/moonixiali/.vscode-oss/extensions/kylinideteam.kylin-cmake-tools-0.0.4-universal/res/ninja/linux-x64/ninja"
+			"type" : "FILEPATH",
+			"value" : "/usr/bin/ninja"
 		},
 		{
 			"name" : "CMAKE_MODULE_LINKER_FLAGS",
@@ -1455,7 +1459,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/home/moonixiali/Documents/OpenGL-Projects/TestingGL/build"
+			"value" : "/home/moonixiali/Documents/B2/OpenGL-Projects/TestingGL/build"
 		},
 		{
 			"name" : "hello_window_IS_TOP_LEVEL",
@@ -1479,7 +1483,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/home/moonixiali/Documents/OpenGL-Projects/TestingGL"
+			"value" : "/home/moonixiali/Documents/B2/OpenGL-Projects/TestingGL"
 		}
 	],
 	"kind" : "cache",

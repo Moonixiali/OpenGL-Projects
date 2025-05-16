@@ -29,7 +29,13 @@ public:
     void make_rat(glm::vec3 position, glm::vec3 eulers,
         glm::vec3 eulerVelocity);
 
-    void destroy_camera(unsigned int);
+    void destroy_object(unsigned int);
+
+    int get_object_count();
+
+    char* get_render_component_name(int i);
+
+    unsigned int allocate_id();
 
 private:
 
@@ -41,6 +47,4 @@ private:
     ComponentSet<TransformComponent>& transformComponents;
     ComponentSet<AnimationComponent>& animationComponents;
     ComponentSet<CameraComponent>& cameraComponents;
-
-    unsigned int allocate_id();
 };

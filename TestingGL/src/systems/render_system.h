@@ -35,6 +35,7 @@ private:
     bool active;
     float speedNew = 10.0f;
     int objectType = 0;
+    int objectDeleteId = 0;
 
     int objectsToCreate;
     glm::vec3 boundsPos = {0, 0, 0};

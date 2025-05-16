@@ -85,4 +85,8 @@ public:
         SearchResult query = binary_search(entity);
         return components[query.position];
     }
+
+    int entity_count() {
+        return entities.size();
+    }
 };

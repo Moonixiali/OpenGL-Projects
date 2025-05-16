@@ -26,7 +26,8 @@ enum class ObjectType {
     eSphere,
     eGeometry,
     eRevy,
-    eRat
+    eRat,
+    eCamera,
 };
 
 enum class AnimationType {

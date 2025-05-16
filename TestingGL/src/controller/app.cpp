@@ -36,7 +36,7 @@ void App::run(Factory* factory) {
 	tFromFrame = 0.0f;
 	lTime = 0;
 
-	fpsLimit = 120.0f;
+	fpsLimit = 100000.0f;
 
 	/* this is the section that runs every frame
 	this checks if the window should close, and if 

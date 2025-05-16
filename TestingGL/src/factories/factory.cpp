@@ -1,4 +1,5 @@
 #include "factory.h"
+#include <iostream>
 
 Factory::Factory(
     ComponentSet<PhysicsComponent>& physicsComponents,
@@ -34,14 +35,34 @@ void Factory::make_camera(glm::vec3 position, glm::vec3 eulers) {
 
     transformComponents.insert(id, transform);
 
+	RenderComponent render;
+	render.objectType = ObjectType::eCamera;
+	render.animationType = AnimationType::eNone;
+	renderComponents.insert(id, render);
+
 	CameraComponent camera;
     cameraComponents.insert(id++, camera);
 }
 
-void Factory::destroy_camera(unsigned int id) {
+void Factory::destroy_object(unsigned int id) {
 
-    transformComponents.remove(id);
-    cameraComponents.remove(id);
+	transformComponents.remove(id);
+	RenderComponent renderer = renderComponents.get_component(id);
+	if (renderer.objectType == ObjectType::eSphere) {
+		physicsComponents.remove(id);
+		renderComponents.remove(id);
+	}
+	else if ((renderer.objectType == ObjectType::eRevy)) {
+		animationComponents.remove(id);
+		renderComponents.remove(id);
+	}
+	else if (renderer.objectType == ObjectType::eRat) {
+		physicsComponents.remove(id);
+		renderComponents.remove(id);
+	}
+	else if (renderer.objectType == ObjectType::eCamera) {
+		cameraComponents.remove(id);
+	}
 	garbage_bin.push_back(id);
 }
 
@@ -106,3 +127,17 @@ void Factory::make_rat(glm::vec3 position, glm::vec3 eulers, glm::vec3 eulerVelo
 	render.animationType = AnimationType::eNone;
 	renderComponents.insert(id++, render);
 }
+
+int Factory::get_object_count() {
+	return renderComponents.entity_count();
+}
+
+char* Factory::get_render_component_name(int i) {
+	RenderComponent render = renderComponents.get_component(i);
+	if (render.objectType == ObjectType::eSphere) { return "Sphere"; }
+	if (render.objectType == ObjectType::eRat) { return "Rat"; }
+	if (render.objectType == ObjectType::eRevy) { return "Character"; }
+	if (render.objectType == ObjectType::eCamera) { return "Camera"; }
+	else return "idk";
+}
+
