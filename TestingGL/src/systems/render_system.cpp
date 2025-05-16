@@ -5,6 +5,9 @@
 #include "../controller/app.h"
 #include "../components/component_set.h"
 
+// wizardry that sets up this script
+// I don't fully get what does what here
+// but it works, so I won't touch it for now
 RenderSystem::RenderSystem(std::vector<unsigned int>& shaders, 
     GLFWwindow* window, ComponentSet<TransformComponent> &transforms,
     ComponentSet<RenderComponent> &renderables,
@@ -36,6 +39,9 @@ animations(animations) {
     
 }
 
+// when the app closes, this runs
+// it deletes all of the rendering stuff that
+// we store in memory
 RenderSystem::~RenderSystem() {
 
     glDeleteVertexArrays(VAOs.size(), VAOs.data());
@@ -47,6 +53,9 @@ RenderSystem::~RenderSystem() {
     glDeleteTextures(textures.size(), textures.data());
 }
 
+// builds the sky using the images we provide
+// the sky is used for lighting, so it's super
+// important to get these right
 void RenderSystem::build_sky() {
 
     TextureFactory textureFactory;
@@ -62,12 +71,19 @@ void RenderSystem::build_sky() {
     
 }
 
+// this assigns meshes, animations and other
+// stuff to our object types
+// sketchy way to do stuff like this, since 
+// we need to create a new object type and assign
+// this stuff manually every time, but this is a
+// PROTOTYPE.
 void RenderSystem::build_models() {
 
     TextureFactory textureFactory;
     MeshFactory meshFactory;
     meshFactory.start_obj_mesh();
 
+    //sphere stuff
     ObjectType objectType = ObjectType::eSphere;
     AnimationType animationType = AnimationType::eNone;
     glm::mat4 preTransform = glm::mat4(1.0f);
@@ -75,11 +91,11 @@ void RenderSystem::build_models() {
         glm::radians(0.0f), { 1.0f, 0.0f, 0.0f });
     preTransform = glm::rotate(preTransform, 
         glm::radians(0.0f), { 0.0f, 1.0f, 0.0f });
-    //meshFactory.append_obj_mesh("../models/rat.obj", preTransform, 0);
     meshFactory.append_obj_mesh("../models/sphere.obj", preTransform, 0);
     elementCounts[objectType] = meshFactory.elementCount;
     meshFactory.elementCount = 0;
 
+    //rat stuff
     objectType = ObjectType::eRat;
     animationType = AnimationType::eNone;
     offsets[objectType][animationType] = meshFactory.offset;
@@ -92,6 +108,7 @@ void RenderSystem::build_models() {
     elementCounts[objectType] = meshFactory.elementCount;
     meshFactory.elementCount = 0;
 
+    //revy stuff
     objectType = ObjectType::eRevy;
     animationType = AnimationType::eRun;
     preTransform = glm::mat4(1.0f);
@@ -121,6 +138,10 @@ void RenderSystem::build_models() {
     VBOs[1] = mesh.VBO;
     EBOs[1] = mesh.EBO;
 
+    // the texture array
+    // it's super duper important since
+    // if an object reuses a texture, we
+    // don't need to load it into memory again
     textureFactory.start_texture_array(3);
     textureFactory.load_into_array("../img/paper.jpg", 0);
     textureFactory.load_into_array("../img/tex_rat.png", 1);
@@ -129,6 +150,10 @@ void RenderSystem::build_models() {
     
 }
 
+// this creates the static geometry
+// static geometry doesn't move and has its position 
+// set before creation, thus we do not need to store
+// position for these objects in memory (transform component)
 void RenderSystem::build_geometry() {
 
     ObjectType objectType = ObjectType::eGeometry;
@@ -199,6 +224,8 @@ void RenderSystem::build_geometry() {
     textures[0] = textureFactory.finalize_texture_array();
 }
 
+// this creates the UI
+// it's pretty human readable, so I won't comment it that much
 void RenderSystem::build_ui(float fps, CameraSystem* camera, Factory* factory) {
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplGlfw_NewFrame();
@@ -339,6 +366,7 @@ void RenderSystem::build_ui(float fps, CameraSystem* camera, Factory* factory) {
             ImGui::Unindent(10);
         }
     }
+    // object deletion
     if (ImGui::CollapsingHeader("Object Deletion")) {
         ImGui::Indent(10);
         if (ImGui::CollapsingHeader("Objects")) {
@@ -358,16 +386,20 @@ void RenderSystem::build_ui(float fps, CameraSystem* camera, Factory* factory) {
     }
     ImGui::End();
 
-
     ImGui::Render();
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
-    
+
+// the BIG update function
+// this thing is EVIL and you won't understand
+// a single thing, but I'll comment it anyway
 void RenderSystem::update() {
     
+    // clear whatever is currently in our buffers
+    // (the old rendered frame)
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    //Sky
+    // render the skybox cube thing
     glUseProgram(shaders[0]); 
     glDisable(GL_DEPTH_TEST);
     glActiveTexture(GL_TEXTURE1);
@@ -375,7 +407,7 @@ void RenderSystem::update() {
     glDrawArrays(GL_TRIANGLES, 0, 6);
     glEnable(GL_DEPTH_TEST);
 
-    //Static geometry objects
+    // render the static geometry stuff
     glUseProgram(shaders[1]); 
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D_ARRAY, textures[0]);
@@ -383,17 +415,21 @@ void RenderSystem::update() {
     glDrawElements(GL_TRIANGLES, elementCounts[ObjectType::eGeometry], 
         GL_UNSIGNED_INT, 0);
     
-    //Everything else
+    // render literally everything else except the UI
     glUseProgram(shaders[2]);
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D_ARRAY, textures[1]);
     glBindVertexArray(VAOs[1]);
+    // for loop to get and render all renderable objects
+    // aren't we so lucky that they all have render components?
     for (size_t i = 0; i < renderables.entities.size(); ++i) {
 
+        // get the components for the renderable object
         uint32_t entity = renderables.entities[i];
         RenderComponent& renderable = renderables.components[i];
         TransformComponent& transform = transforms.get_component(entity);
 
+        //apply whatever rotation velocity it has (if any)
         glm::mat4 model = glm::mat4(1.0f);
 	    model = glm::translate(model, transform.position);
 	    model = glm::rotate(
@@ -406,9 +442,10 @@ void RenderSystem::update() {
             model, glm::radians(transform.eulers.z), 
             { 0.0f, 0.0f, 1.0f });
         glUniformMatrix4fv(
-		    modelLocation, 1, GL_FALSE, 
-		    glm::value_ptr(model));
-               unsigned int elementCount = elementCounts[renderable.objectType];
+		    modelLocation, 1, GL_FALSE, glm::value_ptr(model));
+        
+        // animation stuff
+        unsigned int elementCount = elementCounts[renderable.objectType];
         size_t frame = 0;
         if (renderable.animationType != AnimationType::eNone) {
             AnimationComponent& animation = 
@@ -419,7 +456,10 @@ void RenderSystem::update() {
             sizeof(unsigned int) * (
                 offsets[renderable.objectType][renderable.animationType] 
                 + frame * elementCount);
+        
+        // now we finally draw the damn thing on-screen
         glDrawElements(GL_TRIANGLES, elementCount, GL_UNSIGNED_INT, 
             (void*)(offset));
     }
 }
+// 465 lines is kind of scary for 1 script...

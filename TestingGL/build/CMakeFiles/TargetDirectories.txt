@@ -1,3 +1,0 @@
-/home/moonixiali/Documents/B2/OpenGL-Projects/TestingGL/build/CMakeFiles/hello_window.dir
-/home/moonixiali/Documents/B2/OpenGL-Projects/TestingGL/build/CMakeFiles/edit_cache.dir
-/home/moonixiali/Documents/B2/OpenGL-Projects/TestingGL/build/CMakeFiles/rebuild_cache.dir
